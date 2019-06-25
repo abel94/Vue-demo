@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="./vue.js"></script>
+    <title>vue.js template</title>
+</head>
+<body>
+    <div id="root">
+        <div 
+            v-bind:[attrname] = "title"
+            v-bind:abc = "title"
+            contenteditable = "false"
+            @click = "handleClick"
+            >
+            {{title}}
+        </div>
+    </div>
+</body>
+<script>
+    var abc = 'el'
+    var vm = new Vue({
+        [abc]: '#root',
+        data: {
+            attrname: 'title',
+            title: '<h1>hello</h1>'
+        },
+        methods: {
+            handleClick(){
+                console.log(0)
+            }
+        }
+    })
+</script>
+</html>
