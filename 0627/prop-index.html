@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="./vue.js"></script>
+    <title>vue.js prop</title>
+</head>
+
+<body>
+    <div id="root">
+        <blog title="今天很开心" @click=></blog>
+        <button-counter>
+            <comp1></comp1>
+        </button-counter>
+        <ul>
+            <li v-for="c in compoentNames" @click="handleClick(c)">{{c}}</li>
+        </ul>
+    </div>
+<script>
+    // 组件blog
+    Vue.component('blog', {
+        props: ['title'],
+        template: '<h3>{{title}}</h3>'
+    })
+    // 局部组件
+    const comp1 = {
+        template: '<div>compoent 1</div>',
+        mounted() {
+            console.log(1)
+        }
+    }
+
+    // 组建 blog button
+    Vue.component('button-counter', {
+        data: function () {
+            return {
+                count: 0
+            }
+        },
+        template: '<button @click="count++"> you clicked me {{ count }} times.</button>',
+        components:{
+            comp1
+        }
+    })
+
+    
+    const comp2 = {
+        template: '<div>compoent 2</div>',
+        mounted() {
+            console.log(2)
+        }
+    }
+    const comp3 = {
+        template: '<div>compoent 3</div>',
+        mounted() {
+            console.log(3)
+        }
+    }
+
+    new Vue({
+        el: '#root',
+        data: {
+            compoentNames: ['comp1', 'comp2', 'copm3'],
+            currentComp: 'comp1'
+        },
+        methods: {
+            handleClick(component) {
+                this.currentComp = component
+                console.log(this.currentComp)
+            }
+        },
+        components: {
+            comp1,
+            comp2,
+            comp3
+        }
+    })
+   
+
+
+
+</script>
+</body>
+
+</html>
