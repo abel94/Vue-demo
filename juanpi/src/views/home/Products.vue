@@ -2,7 +2,7 @@
  <!-- 商品列表 start -->
   <div>
     <div class="products-list">
-      <div class="product-item" v-for="goods in goodsList" :key="goods.goods_id">
+      <div class="product-item" v-for="goods in goodsList" :key="goods.goods_id" @click="handleClick(goods.goods_id)">
         <div class="item-img">
           <img
             :src="goods.pic_url"
@@ -36,16 +36,27 @@ export default {
   },
 
   async mounted() {
-    let page = 0;
+
+    Indicator.open()
     let result = await http.get({
       url:
         "api/getGoods?page=2&zy_ids=p8_c4_l4&app_name=zhe&catname=tab_hpzc&flag=tab_hpzc"
     });
     this.goodsList = result.data.goods;
+    Indicator.close()
+  },
+  methods: {
+    handleClick(id) {
+      this.$router.push({
+        name: 'detail',
+        params: {
+           id
+        }
+      })
+    }
   }
 };
 </script>
-
 
 <style lang="stylus" scoped>
 .products-list {

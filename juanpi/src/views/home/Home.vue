@@ -88,6 +88,7 @@ import Nav from "./Nav";
 import Products from "./Products";
 import Banner from "./Banner";
 import BScroll from "better-scroll";
+
 export default {
   components: {
     Nav,
@@ -108,7 +109,6 @@ export default {
 .scroll-wrap {
   overflow: hidden;
   height: 100%;
-
   .scroll-content {
     .main-search {
       height: 0.44rem;
@@ -149,21 +149,21 @@ export default {
 
     .type-list {
       display: flex;
+      background #fff
       height: 0.84rem;
       width 100%
       ul {
-        height: 100%;
-        width: 100%;
+        width 100%
         display: flex;
-
+        flex 1
         li {
-          flex: 1;
+          width 25%
           display: flex;
           a {
+            width 100%
             display: flex;
-
             img {
-              width : 100%;
+              height : 100%;
             }
           }
         }

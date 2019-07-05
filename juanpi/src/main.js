@@ -2,9 +2,11 @@ import Vue from 'vue'
 import App from './App.vue'
 
 import router from './router/'
+import './mixins/scroll'
 // 引入重置样式
 import './assets/styles/reset.styl'
 import './assets/styles/swiper.styl'
+
 
 // 是否显示vue的提示信息
 Vue.config.productionTip = false

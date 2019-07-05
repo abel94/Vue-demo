@@ -74,11 +74,7 @@
 </template>
 
 <script>
-import Home from "./home/Home";
 export default {
-  components: {
-    Home
-  }
 };
 </script>
 
