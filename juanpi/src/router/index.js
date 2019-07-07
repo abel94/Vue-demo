@@ -14,6 +14,8 @@ import Carts from '../views/carts/Carts'
 import Mine from '../views/mine/Mine'
 // 详情页
 import Detail from '../views/detail/Detail'
+// 搜索页
+import Search from '../views/search/Search'
 
 // 首页子路由
 import Products from '../views/home/Products'
@@ -74,6 +76,11 @@ let routes = [
         path: '/detail/:id',
         name: 'detail',
         component: Detail
+    },
+    {
+        path: '/search',
+        name: 'search',
+        component: Search
     }
 ]
 

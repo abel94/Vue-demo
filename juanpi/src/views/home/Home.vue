@@ -4,22 +4,23 @@
       <!-- 搜索 start -->
       <div class="main-search">
         <div class="search-content">
-          <a href="javascript:void(0)">
-            <svg
-              width="15"
-              height="15"
-              viewBox="0 0 1024 1024"
-              version="1.1"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                fill="#8a8a8a"
-                d="M184.1152 727.1936A384 384 0 1 1 727.1936 184.1152 384 384 0 0 1 184.1152 727.1936z m36.1984-36.1984a332.8 332.8 0 1 0 470.6816-470.6816 332.8 332.8 0 0 0-470.6816 470.6816zM745.2672 672.8704l181.0432 181.0432a51.2 51.2 0 0 1-72.3968 72.3968l-181.0432-181.0432 72.3968-72.3968z"
-              />
-            </svg>
-            <span class="search-red">卷皮</span>
-            <span class="search-333">搜索</span>
-          </a>
+          <router-link to="/search" tag="a">
+              <svg
+                width="15"
+                height="15"
+                viewBox="0 0 1024 1024"
+                version="1.1"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill="#8a8a8a"
+                  d="M184.1152 727.1936A384 384 0 1 1 727.1936 184.1152 384 384 0 0 1 184.1152 727.1936z m36.1984-36.1984a332.8 332.8 0 1 0 470.6816-470.6816 332.8 332.8 0 0 0-470.6816 470.6816zM745.2672 672.8704l181.0432 181.0432a51.2 51.2 0 0 1-72.3968 72.3968l-181.0432-181.0432 72.3968-72.3968z"
+                />
+              </svg>
+              <span class="search-red">卷皮</span>
+              <span class="search-333">搜索</span>
+          </router-link>
+         
           <img width="44" height="44" src="../../assets/images/searchtype_132x132.png" />
         </div>
       </div>
@@ -95,7 +96,7 @@ export default {
     Products,
     Banner
   },
-  async mounted() {
+  mounted() {
     let bScroll = new BScroll(".scroll-wrap", {
       click: true,
       pullUpLoad: true

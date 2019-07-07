@@ -6,6 +6,7 @@ import './mixins/scroll'
 // 引入重置样式
 import './assets/styles/reset.styl'
 import './assets/styles/swiper.styl'
+import './assets/styles/border.styl'
 
 
 // 是否显示vue的提示信息

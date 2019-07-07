@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    // 设置常量保存状态
+    const PENDING = 'pending'
+    const RESOLVE = 'resolve'
+    const REJECTED = 'rejected'
+
+    function MyPromise(fn) {
+        // 可能存在异步 保存this的指向，用于获取正确的this指向
+        const that = this
+        that.state = PENDING
+        that.value = null
+        
+        // resolvedCallbacks 和 rejectedCallbacks用于保存then中的回调
+        that.resolveCallbacks = []
+        that.rejectedCallbacks = [] 
+
+        function resolve(value) {
+            if (that.state === PENDING) {
+                that.state = RESOLVE
+                that.value = value
+                that.resolveCallbacks.map(cb=>(that.value))
+            }
+        }
+
+        function reject(value) {
+            if (that.state === PENDING) {
+                that.state = REJECTED
+                that.value = value
+                that.rejectedCallbacks.map(cb =>cb(that.value))
+            }
+        }
+    }
+</script>
+
+</html>
