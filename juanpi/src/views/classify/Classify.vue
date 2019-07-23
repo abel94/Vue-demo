@@ -30,19 +30,21 @@
 import ClassifyItem from "./ClassifyItem";
 import http from "../../utils/http";
 import BScroll from "better-scroll";
-
+import { Indicator } from 'mint-ui'
 export default {
   data() {
     return {
       productType: [],
       isactive: 0,
-      flag: 0
+      flag: 0,
+      bsFlag: null
     };
   },
   components: {
     ClassifyItem
   },
   async mounted() {
+    Indicator.open()
     let resultType = await http.get({
       url: "category/main/list"
     });
@@ -51,10 +53,13 @@ export default {
       click: true,
       pullUpLoad: true
     });
+    this.bsFlag = bScroll
+    bScroll.scrollTo(0, 0);
   },
   methods: {
     handleClick(id){
       this.flag = id
+      this.bsFlag.scrollTo(0, 0)
     },
     activeHover(index) {
       this.isactive = index;

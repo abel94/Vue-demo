@@ -8,15 +8,18 @@ import Home from '../views/home/Home'
 import Classify from '../views/classify/Classify'
 // 分类页子路由
 import ClassifyItem from '../views/classify/ClassifyItem'
+
 // 购物车页
 import Carts from '../views/carts/Carts'
 // 我的页
 import Mine from '../views/mine/Mine'
 // 详情页
 import Detail from '../views/detail/Detail'
+
 // 搜索页
 import Search from '../views/search/Search'
-
+// 搜索页结果
+import SearchView from '../views/search/SearchView'
 // 首页子路由
 import Products from '../views/home/Products'
 import SingleProducts from '../views/home/SingleProducts'
@@ -81,7 +84,13 @@ let routes = [
         path: '/search',
         name: 'search',
         component: Search
+    },
+    {
+        path: '/searchview/:resultVlaue',
+        name: 'searchview',
+        component: SearchView
     }
+
 ]
 
 export default new VueRouter({

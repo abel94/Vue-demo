@@ -12,6 +12,10 @@ module.exports = {
             '/ptgoods': {
                 target: 'https://detail-api.juanpi.com',
                 changeOrigin: true
+            },
+            '/search': {
+                target: 'https://m.juanpi.com',
+                changeOrigin: true
             }
         },
     }

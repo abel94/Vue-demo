@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="carts-title">
-            <a>
+            <a href="javascript:void(0)">
                 <svg width="200px" height="200.00px" viewBox="0 0 1024 1024" version="1.1" 
                 xmlns="http://www.w3.org/2000/svg">
                 <path fill="#8a8a8a" d="M324.211517 511.805631 787.889594 73.082583c16.19422-16.630365 16.19422-43.974704 0-60.605068-16.19422-16.630365-42.495607-16.630365-58.613976 0L235.750113 479.360302c-8.647031 8.969398-12.344775 20.934917-11.719003 32.445329-0.644735 11.90863 3.071972 23.874149 11.719003 32.824585l493.506542 466.882788c16.118369 16.649327 42.438718 16.649327 58.613976 0 16.19422-17.085471 16.19422-43.974704 0-60.605068L324.211517 511.805631" /></svg>
@@ -42,7 +42,8 @@ export default {
                 justify-content center
                 align-items center
                 svg
-                    width .2rem;
+                    width .2rem !important;
+                    height .2rem !important;
             div
                 display flex
                 justify-content center

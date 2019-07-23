@@ -3,6 +3,7 @@
     <div class="search-content">
       <div class="search-ipt">
         <svg
+          @click="searchClick()"
           width="15"
           height="15"
           viewBox="0 0 1024 1024"
@@ -14,9 +15,9 @@
             d="M184.1152 727.1936A384 384 0 1 1 727.1936 184.1152 384 384 0 0 1 184.1152 727.1936z m36.1984-36.1984a332.8 332.8 0 1 0 470.6816-470.6816 332.8 332.8 0 0 0-470.6816 470.6816zM745.2672 672.8704l181.0432 181.0432a51.2 51.2 0 0 1-72.3968 72.3968l-181.0432-181.0432 72.3968-72.3968z"
           />
         </svg>
-        <input />
+        <input type="text" placeholder="搜索商品" ref="iptValue" @keyup.enter="searchClick()"/>
       </div>
-      <a href="javascript:void(0)">取消</a>
+      <a href="javascript:void(0)" @click="backClick()">取消</a>
     </div>
     <div class="hot-search">
       <p>热搜</p>
@@ -45,6 +46,33 @@
     </div>
   </div>
 </template>
+<script>
+export default {
+  data() {
+    return {
+      searchValue: null,
+      goodsList: []
+    }
+  },
+
+  methods: {
+    backClick() {
+      this.$router.go(-1)
+    },
+   
+    searchClick() {
+      this.searchValue = this.$refs.iptValue.value
+      this.$router.push({
+        name: 'searchview',
+        params: {
+          resultVlaue:  this.searchValue 
+        }
+      })
+    }
+  }
+}
+</script>
+
 <style lang="stylus" scoped>
 .search-wrap {
   height: 100%;

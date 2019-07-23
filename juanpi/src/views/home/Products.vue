@@ -1,12 +1,15 @@
 <template>
- <!-- 商品列表 start -->
+  <!-- 商品列表 start -->
   <div>
     <div class="products-list">
-      <div class="product-item" v-for="goods in goodsList" :key="goods.goods_id" @click="handleClick(goods.goods_id)">
+      <div
+        class="product-item"
+        v-for="goods in goodsList"
+        :key="goods.goods_id"
+        @click="handleClick(goods.goods_id)"
+      >
         <div class="item-img">
-          <img
-            :src="goods.pic_url"
-          />
+          <img :src="goods.pic_url" />
         </div>
         <div class="item-price">
           <span>￥{{goods.cprice}}</span>
@@ -17,7 +20,6 @@
           <span>{{goods.time_left}}</span>
         </div>
       </div>
-  
     </div>
   </div>
 
@@ -27,32 +29,75 @@
 <script>
 import http from "../../utils/http";
 import { Indicator, Toast } from "mint-ui";
-import _ from "lodash";
+import BScroll from "better-scroll";
+
 export default {
   data() {
     return {
-      goodsList: []
+      goodsList: {}
     };
   },
 
   async mounted() {
-
-    Indicator.open()
+    let page = 3;
+    Indicator.open();
     let result = await http.get({
       url:
         "api/getGoods?page=2&zy_ids=p8_c4_l4&app_name=zhe&catname=tab_hpzc&flag=tab_hpzc"
     });
+    // console.log("p" + this.$store.state.position);
+
     this.goodsList = result.data.goods;
-    Indicator.close()
+    Indicator.close();
+    let bScroll = new BScroll(".scroll-wrap", {
+      pullUpLoad: true,
+      click: true
+    });
+    let _this = this;
+
+    // 从详情页返回时，位置回复到上次滚动的地方
+    // bScroll.scrollTo(0, this.$store.state.position);
+    // console.log("product is height" + this.$store.state.position);
+
+    // 上拉刷新
+    bScroll.on("pullingUp", async function() {
+      Indicator.open();
+      let moreResult = await http.get({
+        url: `api/getGoods?page=${page}&zy_ids=p8_c4_l4&app_name=zhe&catname=tab_hpzc&flag=tab_hpzc`
+      });
+
+      if (moreResult.data.goods) {
+        _this.goodsList = [..._this.goodsList, ...moreResult.data.goods];
+        _this.$nextTick(() => {
+          Indicator.close();
+          page++;
+          this.refresh();
+          this.finishPullUp();
+        });
+      } else {
+        Toast({
+          message: "到底了",
+          position: "bottom",
+          duration: 2000
+        });
+        Indicator.close();
+      }
+    });
+
+    // 记录滚动的位置
+    bScroll.on("scrollEnd", function() {
+      // _this.$store.commit("setPosition", this.y);   
+      // console.log("scroll is position " + _this.$store.state.position);
+    });
   },
   methods: {
     handleClick(id) {
       this.$router.push({
-        name: 'detail',
+        name: "detail",
         params: {
-           id
+          id
         }
-      })
+      });
     }
   }
 };
@@ -64,9 +109,10 @@ export default {
   height: 100%;
   display: flex;
   flex-wrap: wrap;
+
   .product-item {
     width: 50%;
-    height: 2.43rem;
+    height: 2.6rem;
 
     .item-img {
       img {

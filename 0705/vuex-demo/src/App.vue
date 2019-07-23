@@ -10,7 +10,7 @@ import Home from "./views/Home";
 import { mapState } from 'vuex'
 
 export default {
-  mounted() {
+  async mounted() {
     console.log(this.$store.state.count);
   },
 

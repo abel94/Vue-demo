@@ -1,12 +1,15 @@
 <template>
- <!-- 商品列表 start -->
+  <!-- 商品列表 start -->
   <div>
     <div class="products-list">
-      <div class="product-item" v-for="goods in goodsList" :key="goods.goods_id"  @click="handleClick(goods.goods_id)">
+      <div
+        class="product-item"
+        v-for="goods in goodsList"
+        :key="goods.goods_id"
+        @click="handleClick(goods.goods_id)"
+      >
         <div class="item-img">
-          <img
-            :src="goods.pic_url"
-          />
+          <img :src="goods.pic_url" />
         </div>
         <div class="item-price">
           <span>￥{{goods.cprice}}</span>
@@ -25,31 +28,60 @@
 <script>
 import http from "../../utils/http";
 import { Indicator, Toast } from "mint-ui";
+import BScroll from "better-scroll";
 import _ from "lodash";
 export default {
   data() {
     return {
-      goodsList: []
+      goodsList: {}
     };
   },
 
   async mounted() {
-    Indicator.open()
+    let page = 4
+    Indicator.open();
     let result = await http.get({
       url:
-        "api/getGoods?page=1&zy_ids=p8_c4_l4&app_name=zhe&catname=tab_hpzc&flag=tab_hpzc"
+        "api/getGoods?page=3&zy_ids=p8_c4_l4&app_name=zhe&catname=tab_hpzc&flag=tab_hpzc"
     });
     this.goodsList = result.data.goods;
-    Indicator.close()
+    Indicator.close();
+    let bScroll = new BScroll(".scroll-wrap", {
+      pullUpLoad: true,
+      click: true
+    });
+    let _this = this;
+    bScroll.on("pullingUp", async function() {
+      Indicator.open();
+      let moreResult = await http.get({
+        url: `api/getGoods?page=${page}&zy_ids=p8_c4_l4&app_name=zhe&catname=tab_hpzc&flag=tab_hpzc`
+      });
+      page ++;
+      this.refresh();
+      this.finishPullUp();
+      if (moreResult.data.goods) {
+        _this.goodsList = [..._this.goodsList, ...moreResult.data.goods];
+        Indicator.close();
+      } else {
+        Toast({
+          message: "到底了",
+          position: "bottom",
+          duration: 2000
+        });
+        Indicator.close();
+      }
+    });
+    bScroll.on("scrollEnd", function() {
+    })
   },
   methods: {
     handleClick(id) {
       this.$router.push({
-        name: 'detail',
+        name: "detail",
         params: {
-           id
+          id
         }
-      })
+      });
     }
   }
 };
@@ -62,6 +94,7 @@ export default {
   height: 100%;
   display: flex;
   flex-wrap: wrap;
+
   .product-item {
     width: 50%;
     height: 2.43rem;

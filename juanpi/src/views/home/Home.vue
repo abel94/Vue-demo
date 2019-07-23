@@ -96,12 +96,6 @@ export default {
     Products,
     Banner
   },
-  mounted() {
-    let bScroll = new BScroll(".scroll-wrap", {
-      click: true,
-      pullUpLoad: true
-    });
-  }
 };
 </script>
 
@@ -127,8 +121,8 @@ export default {
 
         a {
           height: 0.28rem;
-          width: 3.1rem;
           display: flex;
+          flex 1
           padding: 0 0.07rem;
           background: #f2f2f2;
           align-items: center;
@@ -173,7 +167,6 @@ export default {
 
     .preferential-wrap {
       width: 100%;
-      height: 2.28rem;
       display: flex;
 
       .pre-left {
